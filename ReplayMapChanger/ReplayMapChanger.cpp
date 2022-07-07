@@ -18,7 +18,7 @@ void ReplayMapChanger::onLoad()
 	});
 
 	CurlRequest req;
-	req.url = "https://raw.githubusercontent.com/MrPh1l/ReplayMapChanger/main/source/data/MapNames.json";
+	req.url = "https://raw.githubusercontent.com/MrPh1l/ReplayMapChanger/master/data/ReplayMapChanger/MapNames.json";
 	HttpWrapper::SendCurlRequest(req, [this](int code, std::string result)
 	{
 		if (code == 200 && json::accept(result))
