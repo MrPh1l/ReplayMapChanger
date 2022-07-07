@@ -55,7 +55,6 @@ void ReplayMapChanger::onLoad()
 
 void ReplayMapChanger::onUnload()
 {
-	cvarManager->removeNotifier("mrp");
 	gameWrapper->UnhookEventPost("Function TAGame.GameInfo_Replay_TA.InitGame");
 	gameWrapper->UnhookEvent("Function TAGame.GameInfo_Replay_TA.Destroyed");
 }
