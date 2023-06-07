@@ -21,18 +21,18 @@ void ReplayMapChanger::onLoad()
 	req.url = "https://raw.githubusercontent.com/MrPh1l/ReplayMapChanger/master/data/ReplayMapChanger/MapNames.json";
 	HttpWrapper::SendCurlRequest(req, [this](int code, std::string result)
 	{
-		if (code == 200 && json::accept(result))
-		{
-			json jsonResult = json::parse(result);
-			mapNames.clear();
+		//if (code == 200 && json::accept(result))
+		//{
+		//	json jsonResult = json::parse(result);
+		//	mapNames.clear();
 
-			for (auto& [key, value] : jsonResult.items())
-			{
-				mapNames.emplace(key, value);
-			}
-		}
-		else // Invalid json. Use local file
-		{
+		//	for (auto& [key, value] : jsonResult.items())
+		//	{
+		//		mapNames.emplace(key, value);
+		//	}
+		//}
+		//else // Invalid json. Use local file
+		//{
 			if (std::filesystem::exists({ gameWrapper->GetDataFolder() / "ReplayMapChanger" / "MapNames.json" }))
 			{
 				std::ifstream stream(gameWrapper->GetDataFolder() / "ReplayMapChanger" / "MapNames.json");
@@ -49,7 +49,7 @@ void ReplayMapChanger::onLoad()
 				}
 				catch (json::parse_error& ex) {}
 			}
-		}
+		//}
 	});
 }
 
@@ -69,7 +69,7 @@ void ReplayMapChanger::LoadReplayWithMap(std::string mapFilename)
 	ReplayWrapper replay = serverReplay.GetReplay();
 	if (replay.IsNull()) return;
 
-	UnrealStringWrapper replayFilename = replay.GetFilename();
+	UnrealStringWrapper replayFilename = replay.GetId();
 	if (replayFilename.IsNull()) return;
 
 	cvarManager->executeCommand("unreal_command \"start " + mapFilename + "?Game=TAGame.GameInfo_Replay_TA?Replay=..%5c..%5cTAGame%5cDemos%5c" + replayFilename.ToString() + ".replay\"", false);
