@@ -21,18 +21,18 @@ void ReplayMapChanger::onLoad()
 	req.url = "https://raw.githubusercontent.com/MrPh1l/ReplayMapChanger/master/data/ReplayMapChanger/MapNames.json";
 	HttpWrapper::SendCurlRequest(req, [this](int code, std::string result)
 	{
-		//if (code == 200 && json::accept(result))
-		//{
-		//	json jsonResult = json::parse(result);
-		//	mapNames.clear();
+		if (code == 200 && json::accept(result))
+		{
+			json jsonResult = json::parse(result);
+			mapNames.clear();
 
-		//	for (auto& [key, value] : jsonResult.items())
-		//	{
-		//		mapNames.emplace(key, value);
-		//	}
-		//}
-		//else // Invalid json. Use local file
-		//{
+			for (auto& [key, value] : jsonResult.items())
+			{
+				mapNames.emplace(key, value);
+			}
+		}
+		else // Invalid json. Use local file
+		{
 			if (std::filesystem::exists({ gameWrapper->GetDataFolder() / "ReplayMapChanger" / "MapNames.json" }))
 			{
 				std::ifstream stream(gameWrapper->GetDataFolder() / "ReplayMapChanger" / "MapNames.json");
@@ -49,7 +49,7 @@ void ReplayMapChanger::onLoad()
 				}
 				catch (json::parse_error& ex) {}
 			}
-		//}
+		}
 	});
 }
 
