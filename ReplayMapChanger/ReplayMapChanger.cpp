@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "ReplayMapChanger.h"
+#include "bakkesmod/wrappers/GameObject/ReplayManagerWrapper.h"
 
 BAKKESMOD_PLUGIN(ReplayMapChanger, "Allows to change current map while in a replay", plugin_version, PLUGINTYPE_REPLAY)
 
@@ -69,8 +70,6 @@ void ReplayMapChanger::LoadReplayWithMap(std::string mapFilename)
 	ReplayWrapper replay = serverReplay.GetReplay();
 	if (replay.IsNull()) return;
 
-	UnrealStringWrapper replayFilename = replay.GetId();
-	if (replayFilename.IsNull()) return;
-
-	cvarManager->executeCommand("unreal_command \"start " + mapFilename + "?Game=TAGame.GameInfo_Replay_TA?Replay=..%5c..%5cTAGame%5cDemos%5c" + replayFilename.ToString() + ".replay\"", false);
+	ReplayManagerWrapper const replayManager = gameWrapper->GetReplayManagerWrapper();
+	replayManager.PlayReplay(replay, mapFilename);
 }
