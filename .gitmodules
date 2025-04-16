@@ -1,3 +1,0 @@
-[submodule "ReplayMapChanger/json"]
-	path = ReplayMapChanger/json
-	url = https://github.com/nlohmann/json.git

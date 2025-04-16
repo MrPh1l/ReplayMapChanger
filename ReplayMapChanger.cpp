@@ -2,7 +2,7 @@
 #include "ReplayMapChanger.h"
 #include "bakkesmod/wrappers/GameObject/ReplayManagerWrapper.h"
 
-BAKKESMOD_PLUGIN(ReplayMapChanger, "Allows to change current map while in a replay", plugin_version, PLUGINTYPE_REPLAY)
+BAKKESMOD_PLUGIN(ReplayMapChanger, "Allows to change current map while in a replay", plugin_version, PLUGINTYPE_FREEPLAY)
 
 std::shared_ptr<CVarManagerWrapper> _globalCvarManager;
 

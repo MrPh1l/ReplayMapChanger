@@ -1,5 +1,6 @@
 #pragma once
 
+#include "GuiBase.h"
 #include "bakkesmod/plugin/bakkesmodplugin.h"
 #include "bakkesmod/plugin/pluginwindow.h"
 #include "bakkesmod/plugin/PluginSettingsWindow.h"
@@ -8,18 +9,15 @@
 constexpr auto plugin_version = stringify(VERSION_MAJOR) "." stringify(VERSION_MINOR) "." stringify(VERSION_PATCH) "." stringify(VERSION_BUILD);
 
 
-class ReplayMapChanger: public BakkesMod::Plugin::BakkesModPlugin, public BakkesMod::Plugin::PluginSettingsWindow
+class ReplayMapChanger: public BakkesMod::Plugin::BakkesModPlugin, public SettingsWindowBase
 {
-
 	bool isInReplay;
 	std::map<std::string, std::string> mapNames;
 
-	virtual void onLoad();
-	virtual void onUnload();
-
+	void onLoad() override;
+	void onUnload() override;
+	
 	void LoadReplayWithMap(std::string mapFilename);
-
+public:
 	void RenderSettings() override;
-	std::string GetPluginName() override;
-	void SetImGuiContext(uintptr_t ctx) override;
 };

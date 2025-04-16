@@ -1,16 +1,6 @@
 #include "pch.h"
 #include "ReplayMapChanger.h"
 
-std::string ReplayMapChanger::GetPluginName()
-{
-	return "Replay Map Changer";
-}
-
-void ReplayMapChanger::SetImGuiContext(uintptr_t ctx)
-{
-	ImGui::SetCurrentContext(reinterpret_cast<ImGuiContext*>(ctx));
-}
-
 void ReplayMapChanger::RenderSettings()
 {
 	if (isInReplay)
